@@ -17,7 +17,7 @@
 
 - (void)awakeFromNib
 {
-  self.sampleItems = [NSArray arrayWithObjects:@"One", @"Two", @"Three", nil];
+  self.sampleItems = @[@"One", @"Two", @"Three"];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
@@ -33,7 +33,7 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
   }
   
-  cell.textLabel.text = [self.sampleItems objectAtIndex:indexPath.row];
+  cell.textLabel.text = self.sampleItems[indexPath.row];
   
   return cell;
 }

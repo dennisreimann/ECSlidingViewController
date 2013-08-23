@@ -17,7 +17,7 @@
 
 - (void)awakeFromNib
 {
-  self.menuItems = [NSArray arrayWithObjects:@"First", @"Second", @"Third", @"Navigation", nil];
+  self.menuItems = @[@"First", @"Second", @"Third", @"Navigation"];
 }
 
 - (void)viewDidLoad
@@ -41,14 +41,14 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
   }
   
-  cell.textLabel.text = [self.menuItems objectAtIndex:indexPath.row];
+  cell.textLabel.text = self.menuItems[indexPath.row];
   
   return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *identifier = [NSString stringWithFormat:@"%@Top", [self.menuItems objectAtIndex:indexPath.row]];
+  NSString *identifier = [NSString stringWithFormat:@"%@Top", self.menuItems[indexPath.row]];
 
   UIViewController *newTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
   
