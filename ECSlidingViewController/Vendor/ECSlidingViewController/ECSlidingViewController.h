@@ -159,6 +159,12 @@ typedef enum {
  */
 @property (nonatomic, assign) ECResetStrategy resetStrategy;
 
+/** Specifies the duration of the anchoring animations.
+ 
+ By default, this is set to 0.25f
+ */
+@property (nonatomic, assign) NSTimeInterval animationDuration;
+
 /** Returns a horizontal panning gesture for moving the top view.
  
  This is typically added to the top view or a top view's navigation bar.

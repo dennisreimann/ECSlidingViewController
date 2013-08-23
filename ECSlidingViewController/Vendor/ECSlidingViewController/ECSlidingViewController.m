@@ -82,6 +82,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 @synthesize shouldAllowUserInteractionsWhenAnchored;
 @synthesize shouldAddPanGestureRecognizerToTopViewSnapshot;
 @synthesize resetStrategy = _resetStrategy;
+@synthesize animationDuration = _animationDuration;
 
 // category properties
 @synthesize topViewSnapshot;
@@ -128,11 +129,11 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
         [animation setSubtype:kCATransitionFromRight];
         [animation setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
         [animation setFillMode:kCAFillModeBoth];
-        [animation setDuration:.25];
+        [animation setDuration:self.animationDuration];
     }
     
     self.topViewController = topViewController;
-    [UIView animateWithDuration:0.25f animations:^() {
+    [UIView animateWithDuration:self.animationDuration animations:^() {
         [[self.view layer] addAnimation:animation forKey:@"topViewTransition"];
     }];
 }
@@ -347,7 +348,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   
   [self topViewHorizontalCenterWillChange:newCenter];
   
-  [UIView animateWithDuration:0.25f animations:^{
+  [UIView animateWithDuration:self.animationDuration animations:^{
     if (animations) {
       animations();
     }
@@ -394,7 +395,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
   
   [self topViewHorizontalCenterWillChange:newCenter];
   
-  [UIView animateWithDuration:0.25f animations:^{
+  [UIView animateWithDuration:self.animationDuration animations:^{
     if (animations) {
       animations();
     }
@@ -431,7 +432,7 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 {
   [self topViewHorizontalCenterWillChange:self.resettedCenter];
   
-  [UIView animateWithDuration:0.25f animations:^{
+  [UIView animateWithDuration:self.animationDuration animations:^{
     if (animations) {
       animations();
     }
@@ -555,6 +556,10 @@ NSString *const ECSlidingViewTopDidReset             = @"ECSlidingViewTopDidRese
 - (CGFloat)resettedCenter
 {
   return (self.view.bounds.size.width / 2);
+}
+
+- (NSTimeInterval)animationDuration {
+  return _animationDuration ? _animationDuration : 0.25f;
 }
 
 - (void)underLeftWillAppear
